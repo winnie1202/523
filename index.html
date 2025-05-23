@@ -8,26 +8,73 @@
     body {
       font-family: "Segoe UI", sans-serif;
       padding: 2rem;
-      background: #f9f9f9;
+      background: #bee1f0 url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23ffffff40'/%3E%3C/svg%3E") repeat;
       color: #333;
       max-width: 800px;
       margin: auto;
+      background-attachment: fixed;
     }
+
     h1 {
       color: #5e4b8b;
       text-align: center;
-    }
-    .question {
       margin-bottom: 2rem;
     }
-    .question h3 {
-      margin-bottom: 0.5rem;
+
+    .question {
+      margin-bottom: 2rem;
+      border: 2px solid #5e4b8b50;
+      padding: 1rem;
+      border-radius: 10px;
+      background: #ffffffcc;
     }
+
+    .question h3 {
+      margin-bottom: 0.75rem;
+      color: #444;
+    }
+
     label {
-      display: block;
-      margin: 0.25rem 0;
+      display: flex;
+      align-items: center;
+      margin: 0.4rem 0;
+      position: relative;
       cursor: pointer;
     }
+
+    label::before {
+      content: "";
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    input[type="radio"] {
+      margin-right: 0.5rem;
+      accent-color: #5e4b8b;
+    }
+
+    /* 彩色點圖示根據選項值自動上色 */
+    label input[value="幻彩紫"] ~ *::before { background: #b39ddb; }
+    label input[value="幻彩粉"] ~ *::before { background: #f8bbd0; }
+    label input[value="質感黑"] ~ *::before { background: #424242; }
+    label input[value="商務灰"] ~ *::before { background: #9e9e9e; }
+    label input[value="簡約米白"] ~ *::before { background: #f5f5dc; }
+    label input[value="青春粉"] ~ *::before { background: #ff8a80; }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.25rem 0 1rem 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
     button {
       background-color: #5e4b8b;
       color: white;
@@ -36,7 +83,10 @@
       border-radius: 6px;
       cursor: pointer;
       font-size: 1rem;
+      display: block;
+      margin: 2rem auto 0;
     }
+
     .result {
       margin-top: 2rem;
       padding: 1rem;
@@ -48,55 +98,72 @@
 <body>
 
 <h1>找出你的命定背包色！</h1>
-<form id="quizForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe4d4VODzPScM7KnZrapUVpwnbIQQLM6bPxAT-eBZI5rB8dSQ/formResponse" method="POST">
+<form id="quizForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe4d4VODzPScM7KnZrapUVpwnbIQQLM6bPxAT-eBZI5rB8dSQ/formResponse" method="POST">
+
+  <div class="question">
+    <h3>姓名</h3>
+    <input type="text" name="entry.1000000001" placeholder="請輸入您的姓名" required>
+    
+    <h3>性別</h3>
+    <select name="entry.1000000002" required>
+      <option value="" disabled selected>請選擇性別</option>
+      <option value="女性">女性</option>
+      <option value="男性">男性</option>
+      <option value="其他/不方便透露">其他/不方便透露</option>
+    </select>
+
+    <h3>年齡</h3>
+    <input type="number" name="entry.1000000003" placeholder="請輸入年齡" min="10" max="100" required>
+  </div>
+
+  <!-- 題目1～5 -->
   <div class="question">
     <h3>Q1. 你假日最喜歡的活動是？</h3>
-    <label><input type="radio" name="entry.1748547320" value="幻彩紫"> 城市咖啡廳探險 ☕</label>
-    <label><input type="radio" name="entry.1748547320" value="幻彩粉"> 百貨血拼與聚餐 🛍️</label>
-    <label><input type="radio" name="entry.1748547320" value="質感黑"> 一個人去書店或展覽 📖</label>
-    <label><input type="radio" name="entry.1748547320" value="商務灰"> 與同事朋友打球或聚會 🏀</label>
-    <label><input type="radio" name="entry.1748547320" value="簡約米白"> 在家耍廢追劇 🍿</label>
-    <label><input type="radio" name="entry.1748547320" value="青春粉"> 戶外野餐與短途旅行 🎒</label>
+    <label><input type="radio" name="entry.1748547320" value="幻彩紫"><span>城市咖啡廳探險 ☕</span></label>
+    <label><input type="radio" name="entry.1748547320" value="幻彩粉"><span>百貨血拼與聚餐 🛍️</span></label>
+    <label><input type="radio" name="entry.1748547320" value="質感黑"><span>一個人去書店或展覽 📖</span></label>
+    <label><input type="radio" name="entry.1748547320" value="商務灰"><span>與同事朋友打球或聚會 🏀</span></label>
+    <label><input type="radio" name="entry.1748547320" value="簡約米白"><span>在家耍廢追劇 🍿</span></label>
+    <label><input type="radio" name="entry.1748547320" value="青春粉"><span>戶外野餐與短途旅行 🎒</span></label>
   </div>
 
   <div class="question">
     <h3>Q2. 你的穿搭風格最常出現哪一種？</h3>
-    <label><input type="radio" name="entry.505723970" value="簡約米白"> 簡約設計感（白、灰、米色系）</label>
-    <label><input type="radio" name="entry.505723970" value="質感黑"> 黑白配 or 素色正裝風</label>
-    <label><input type="radio" name="entry.505723970" value="幻彩粉"> 甜美可愛、粉嫩配件</label>
-    <label><input type="radio" name="entry.505723970" value="幻彩紫"> 時髦混搭、喜歡跳色或亮色系</label>
-    <label><input type="radio" name="entry.505723970" value="青春粉"> 運動休閒，喜歡帽T和球鞋</label>
-    <label><input type="radio" name="entry.505723970" value="簡約米白"> 文青系、偏自然材質與亞麻色調</label>
+    <label><input type="radio" name="entry.505723970" value="簡約米白"><span>簡約設計感（白、灰、米色系）🌀</span></label>
+    <label><input type="radio" name="entry.505723970" value="質感黑"><span>黑白配 or 素色正裝風🫖🖤</span></label>
+    <label><input type="radio" name="entry.505723970" value="幻彩粉"><span>甜美可愛、粉嫩配件💟</span></label>
+    <label><input type="radio" name="entry.505723970" value="幻彩紫"><span>時髦混搭、喜歡跳色或亮色系</span></label>
+    <label><input type="radio" name="entry.505723970" value="青春粉"><span>運動休閒，喜歡帽T和球鞋❤️‍🔥</span></label>
   </div>
 
   <div class="question">
     <h3>Q3. 如果讓你選一個詞代表自己，你會選？</h3>
-    <label><input type="radio" name="entry.1457755187" value="幻彩紫"> 神秘</label>
-    <label><input type="radio" name="entry.1457755187" value="幻彩粉"> 溫柔</label>
-    <label><input type="radio" name="entry.1457755187" value="質感黑"> 幹練</label>
-    <label><input type="radio" name="entry.1457755187" value="商務灰"> 冷靜</label>
-    <label><input type="radio" name="entry.1457755187" value="簡約米白"> 清新</label>
-    <label><input type="radio" name="entry.1457755187" value="青春粉"> 活潑</label>
+    <label><input type="radio" name="entry.1457755187" value="幻彩紫"><span>神秘🔅</span></label>
+    <label><input type="radio" name="entry.1457755187" value="幻彩粉"><span>溫柔✔️</span></label>
+    <label><input type="radio" name="entry.1457755187" value="質感黑"><span>幹練✳️</span></label>
+    <label><input type="radio" name="entry.1457755187" value="商務灰"><span>冷靜</span></label>
+    <label><input type="radio" name="entry.1457755187" value="簡約米白"><span>清新🔶</span></label>
+    <label><input type="radio" name="entry.1457755187" value="青春粉"><span>活潑👣</span></label>
   </div>
 
   <div class="question">
     <h3>Q4. 工作或學習中，你的風格是？</h3>
-    <label><input type="radio" name="entry.2056027828" value="幻彩紫"> 靈感型：腦中點子很多</label>
-    <label><input type="radio" name="entry.2056027828" value="幻彩粉"> 支援型：氣氛溫暖</label>
-    <label><input type="radio" name="entry.2056027828" value="質感黑"> 領導型：注重成果</label>
-    <label><input type="radio" name="entry.2056027828" value="商務灰"> 實作型：習慣流程</label>
-    <label><input type="radio" name="entry.2056027828" value="簡約米白"> 默默型：不張揚但有存在感</label>
-    <label><input type="radio" name="entry.2056027828" value="青春粉"> 活力型：能量滿滿</label>
+    <label><input type="radio" name="entry.2056027828" value="幻彩紫"><span>靈感型：腦中點子很多💖</span></label>
+    <label><input type="radio" name="entry.2056027828" value="幻彩粉"><span>支援型：氣氛溫暖☘️</span></label>
+    <label><input type="radio" name="entry.2056027828" value="質感黑"><span>領導型：注重成果✨</span></label>
+    <label><input type="radio" name="entry.2056027828" value="商務灰"><span>實作型：習慣流程🌈</span></label>
+    <label><input type="radio" name="entry.2056027828" value="簡約米白"><span>默默型：不張揚但有存在感⚡</span></label>
+    <label><input type="radio" name="entry.2056027828" value="青春粉"><span>活力型：能量滿滿🌟</span></label>
   </div>
 
   <div class="question">
     <h3>Q5. 你最常打開哪個社群 App？</h3>
-    <label><input type="radio" name="entry.1899975849" value="幻彩紫"> Instagram</label>
-    <label><input type="radio" name="entry.1899975849" value="幻彩粉"> 小紅書</label>
-    <label><input type="radio" name="entry.1899975849" value="商務灰"> LinkedIn</label>
-    <label><input type="radio" name="entry.1899975849" value="質感黑"> Facebook</label>
-    <label><input type="radio" name="entry.1899975849" value="簡約米白"> Pinterest</label>
-    <label><input type="radio" name="entry.1899975849" value="青春粉"> TikTok</label>
+    <label><input type="radio" name="entry.1899975849" value="幻彩紫"><span>Instagram</span></label>
+    <label><input type="radio" name="entry.1899975849" value="幻彩粉"><span>小紅書</span></label>
+    <label><input type="radio" name="entry.1899975849" value="商務灰"><span>LinkedIn</span></label>
+    <label><input type="radio" name="entry.1899975849" value="質感黑"><span>Facebook</span></label>
+    <label><input type="radio" name="entry.1899975849" value="簡約米白"><span>Pinterest</span></label>
+    <label><input type="radio" name="entry.1899975849" value="青春粉"><span>TikTok</span></label>
   </div>
 
   <button type="submit">送出答案</button>
